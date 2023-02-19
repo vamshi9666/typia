@@ -11,6 +11,5 @@ export interface IRandomGenerator {
     url(): string;
     ipv4(): string;
     ipv6(): string;
-    pattern(regex: RegExp): string;
     date(): string;
 }

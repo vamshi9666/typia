@@ -121,9 +121,5 @@
     "package.json",
     "lib",
     "src"
-  ],
-  "dependencies": {
-    "randexp": "^0.5.3"
-  },
-  "private": true
+  ]
 }

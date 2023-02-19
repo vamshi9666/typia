@@ -1,5 +1,3 @@
-import RandExp from "randexp";
-
 /**
  * @internal
  */
@@ -76,10 +74,6 @@ export namespace RandomGenerator {
 
     export function ipv6(): string {
         return array(() => integer(0, 65535).toString(16), 8).join(":");
-    }
-
-    export function pattern(regex: RegExp): string {
-        return new RandExp(regex).gen();
     }
 
     export function date(min?: number, max?: number): string {

@@ -32,6 +32,14 @@ export namespace RandomProgrammer {
                 {
                     resolve: true,
                     constant: true,
+                    validate: (meta) => {
+                        meta.objects.some((o) =>
+                            o.properties.some((p) =>
+                                p.tags.some((t) => t.kind === "pattern"),
+                            ),
+                        );
+                        throw new Error(NO_PATTERN);
+                    },
                 },
             );
 
@@ -335,12 +343,6 @@ export namespace RandomProgrammer {
                         undefined,
                         undefined,
                     );
-                else if (t.kind === "pattern")
-                    return ts.factory.createCallExpression(
-                        COALESCE(importer)("pattern"),
-                        undefined,
-                        [ts.factory.createIdentifier(`/${t.value}/`)],
-                    );
 
             const tail = RandomRanger.length(COALESCE(importer))({
                 minimum: 5,
@@ -371,3 +373,5 @@ const COALESCE = (importer: FunctionImporter) => (name: string) =>
         ts.factory.createIdentifier(`generator.${name}`),
         IdentifierFactory.join(importer.use("generator"), name),
     );
+
+const NO_PATTERN = "Error on typia.random(): does not support pattern tag.";
